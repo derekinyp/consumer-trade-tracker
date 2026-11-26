@@ -1,5 +1,8 @@
 (async function(){
-const C=['#6B4A2E','#2F6F7E','#A0527A','#6F7F3A','#5B6B8C','#7A6F64'];
+const C=['#1F5FBF','#E8731A','#009E73','#C2185B','#6A3FB5']; // 高對比色盲友善（Okabe–Ito 精神）；覆蓋設計規範系列色，因振達要求同一圖曲線必須醒目可辨
+const DASH=[[],[10,5],[8,4,2,4],[4,3],[14,4,3,4]];
+const PT=['circle','triangle','rect','rectRot','star'];
+const REF='#5A5A5A';
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt=(v,n=1)=>v==null?'—':Number(v).toLocaleString('zh-TW',{minimumFractionDigits:n,maximumFractionDigits:n});
@@ -47,7 +50,7 @@ function makeRefs(labels, refs, seriesForMedian){
     if(it.at==='median-level') v=seriesForMedian?.stats_level?.median;
     if(it.at==='median-yoy') v=seriesForMedian?.stats_yoy?.median;
     if(v==null || Number.isNaN(v)) continue;
-    out.push({label:it.label||`10 年中位數（${fmt(v,it.dec??1)}）`, data:labels.map(()=>v), color:it.color||'#7A6F64', dash:[6,4], width:1.5, pointRadius:0, fill:false});
+    out.push({label:it.label||`10 年中位數（${fmt(v,it.dec??1)}）`, data:labels.map(()=>v), color:REF, dash:[5,4], width:1.2, pointRadius:0, fill:false, isRef:true});
   }
   return out;
 }
@@ -57,10 +60,31 @@ function chart(el,def){
    ${def.labels?`<div class="labels">${def.labels.map(l=>`<span class="tag">${esc(l)}</span>`).join('')}</div>`:''}
    <div class="cv ${def.short?'short':''}"><canvas id="${id}"></canvas></div><div class="cap">${def.cap}</div></div>`);
   const labels=def.labels_x;
-  const all=[...def.ds, ...makeRefs(labels, def.refs, def.refSeries)];
-  charts[id]={el:document.getElementById(id),cfg:{type:def.type||'line',data:{labels,datasets:all.map((d,i)=>({label:d.label,data:d.data,borderColor:d.color||C[i],backgroundColor:d.fill===false?'transparent':(def.fill?(d.color||C[i])+'22':(d.color||C[i])),fill:d.fill!=null?d.fill:!!def.fill,borderWidth:d.width||2,borderDash:d.dash||[],pointRadius:d.pointRadius!=null?d.pointRadius:(def.points?3:0),pointHoverRadius:d.pointRadius===0?0:4,spanGaps:false,tension:0}))},
+  const refs=makeRefs(labels, def.refs, def.refSeries);
+  const n=labels.length;
+  const datasets=def.ds.map((d,i)=>{
+    const col=C[i%C.length];
+    const pr=d.pointRadius!=null?d.pointRadius:(def.points||n<=48?2.5:0);
+    return {label:d.label,data:d.data,borderColor:col,backgroundColor:def.fill?col+'33':col,
+      fill:d.fill!=null?d.fill:!!def.fill,borderWidth:2.5,borderDash:DASH[i%DASH.length],
+      pointStyle:PT[i%PT.length],pointRadius:pr,pointHoverRadius:5,pointBorderColor:col,pointBackgroundColor:col,
+      spanGaps:false,tension:0};
+  }).concat(refs.map(d=>({label:d.label,data:d.data,borderColor:REF,backgroundColor:REF,
+      fill:false,borderWidth:1.2,borderDash:[5,4],pointRadius:0,pointHoverRadius:0,pointStyle:'dash',
+      spanGaps:false,tension:0,_isRef:true})));
+  charts[id]={el:document.getElementById(id),cfg:{type:def.type||'line',data:{labels,datasets},
    options:{responsive:true,maintainAspectRatio:false,animation:false,interaction:{mode:'index',intersect:false},
-    plugins:{legend:{display:all.length>1,position:'bottom',labels:{boxWidth:12,boxHeight:2}},tooltip:{callbacks:{label:c=>`${c.dataset.label}：${c.parsed.y==null?'官方無發布':fmt(c.parsed.y,def.dec??1)}${def.unit||''}`}}},
+    plugins:{legend:{display:datasets.length>1,position:'bottom',labels:{usePointStyle:true,pointStyleWidth:10,boxWidth:10,boxHeight:10,padding:10,
+      generateLabels(chart){
+        const items=Chart.defaults.plugins.legend.labels.generateLabels(chart);
+        items.forEach(it=>{
+          const ds=chart.data.datasets[it.datasetIndex];
+          if(!ds) return;
+          it.strokeStyle=ds.borderColor; it.fillStyle=ds._isRef?'transparent':ds.borderColor;
+          it.lineWidth=ds._isRef?1.2:2.5; it.lineDash=ds.borderDash||[]; it.pointStyle=ds.pointStyle||'circle';
+        });
+        return items;
+      }}},tooltip:{callbacks:{label:c=>`${c.dataset.label}：${c.parsed.y==null?'官方無發布':fmt(c.parsed.y,def.dec??1)}${def.unit||''}`}}},
     scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8,maxRotation:0,autoSkip:true}},y:{grid:{color:'#ECEEF1'},border:{display:false},ticks:{callback:v=>fmt(v,def.ydec??1)+(def.unit||'')}}}}}};
 }
 function align(list,key){ // 合併多序列日期軸，缺值為 null
