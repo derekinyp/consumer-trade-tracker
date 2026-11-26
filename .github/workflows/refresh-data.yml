@@ -1,0 +1,24 @@
+# 每月自動重抓官方資料並重算（不呼叫任何 LLM、不用任何 API 金鑰）。
+# AI 判讀只在 Grok 秘書的 box 上以 `python3 update.py --verdict` 產生後推送。
+name: refresh-data
+on:
+  schedule:
+    - cron: "0 2 20 * *"   # 每月 20 日 02:00 UTC（台北 10:00）
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: python3 update.py
+      - name: commit if changed
+        run: |
+          git config user.name "data-bot"
+          git config user.email "data-bot@users.noreply.github.com"
+          git add data/dashboard.json data/summary.json data/raw
+          git diff --cached --quiet || git commit -m "data: monthly refresh $(date -u +%Y-%m-%d)"
+          git push

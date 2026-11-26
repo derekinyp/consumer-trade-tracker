@@ -1,0 +1,520 @@
+{
+ "generated": "2026-11-26 16:11",
+ "indicators": {
+  "DSPIC96": {
+   "name": "實質可支配個人所得",
+   "label": "稅後｜含政府補助｜已扣通膨｜不含資本利得",
+   "unit": "十億美元（2017 連鎖）",
+   "latest_date": "2026-10",
+   "latest_value": 18460.3,
+   "latest_yoy_pct": 1.607,
+   "last_valid_yoy": {
+    "date": "2026-10",
+    "yoy_pct": 1.607
+   },
+   "level_10y": {
+    "percentile": 99.2,
+    "min": 14273.6,
+    "median": 16711.35,
+    "max": 20510.3,
+    "n": 120
+   },
+   "yoy_10y": {
+    "percentile": 30.8,
+    "min": -21.306,
+    "median": 2.921,
+    "max": 30.62,
+    "n": 120
+   },
+   "missing_in_10y": []
+  },
+  "PSAVERT": {
+   "name": "個人儲蓄率",
+   "label": "低於 5% 代表家庭財務緩衝偏薄",
+   "unit": "%（季調）",
+   "latest_date": "2026-10",
+   "latest_value": 4.1,
+   "latest_yoy_pct": "不適用（比率類看原值）",
+   "last_valid_yoy": null,
+   "level_10y": {
+    "percentile": 10.0,
+    "min": 2.4,
+    "median": 6.15,
+    "max": 31.8,
+    "n": 120
+   },
+   "yoy_10y": null,
+   "missing_in_10y": []
+  },
+  "MEHOINUSA672N": {
+   "name": "實質家庭中位數所得",
+   "label": "稅前｜僅含現金補助｜已扣通膨｜每年 9 月更新",
+   "unit": "美元（已扣通膨）",
+   "latest_date": "2025",
+   "latest_value": 87460.0,
+   "latest_yoy_pct": 2.641,
+   "last_valid_yoy": null,
+   "level_10y": {
+    "percentile": 100.0,
+    "min": 78600.0,
+    "median": 83590.0,
+    "max": 87460.0,
+    "n": 9
+   },
+   "yoy_10y": null,
+   "missing_in_10y": []
+  },
+  "WFRBST01134": {
+   "name": "頂層 1% 淨財富佔比",
+   "label": "每季｜淨財富＝資產－負債｜名目佔比",
+   "unit": "%",
+   "latest_date": "2026-04",
+   "latest_value": 32.5,
+   "latest_yoy_pct": "不適用（比率類看原值）",
+   "last_valid_yoy": null,
+   "level_10y": {
+    "percentile": 100.0,
+    "min": 29.0,
+    "median": 30.4,
+    "max": 32.5,
+    "n": 38
+   },
+   "yoy_10y": null,
+   "missing_in_10y": []
+  },
+  "WFRBSB50215": {
+   "name": "底層 50% 淨財富佔比",
+   "label": "每季｜淨財富＝資產－負債｜名目佔比",
+   "unit": "%",
+   "latest_date": "2026-04",
+   "latest_value": 2.3,
+   "latest_yoy_pct": "不適用（比率類看原值）",
+   "last_valid_yoy": null,
+   "level_10y": {
+    "percentile": 47.4,
+    "min": 1.3,
+    "median": 2.4,
+    "max": 2.7,
+    "n": 38
+   },
+   "yoy_10y": null,
+   "missing_in_10y": []
+  },
+  "DRCCLACBS": {
+   "name": "商業銀行信用卡違約率",
+   "label": "逾期 30 天以上｜底層壓力領先指標",
+   "unit": "%（季調）",
+   "latest_date": "2026-04",
+   "latest_value": 2.85,
+   "latest_yoy_pct": "不適用（比率類看原值）",
+   "last_valid_yoy": null,
+   "level_10y": {
+    "percentile": 71.1,
+    "min": 1.53,
+    "median": 2.54,
+    "max": 3.22,
+    "n": 38
+   },
+   "yoy_10y": null,
+   "missing_in_10y": []
+  },
+  "PCEPI": {
+   "name": "整體 PCE 物價指數",
+   "label": "聯準會基準",
+   "unit": "指數",
+   "latest_date": "2026-10",
+   "latest_value": 132.703,
+   "latest_yoy_pct": 3.845,
+   "last_valid_yoy": {
+    "date": "2026-10",
+    "yoy_pct": 3.845
+   },
+   "level_10y": {
+    "percentile": 100.0,
+    "min": 98.901,
+    "median": 111.067,
+    "max": 132.703,
+    "n": 120
+   },
+   "yoy_10y": {
+    "percentile": 79.2,
+    "min": 0.462,
+    "median": 2.572,
+    "max": 7.218,
+    "n": 120
+   },
+   "missing_in_10y": []
+  },
+  "PCEPILFE": {
+   "name": "核心 PCE 物價指數",
+   "label": "剔除食品與能源",
+   "unit": "指數",
+   "latest_date": "2026-10",
+   "latest_value": 131.312,
+   "latest_yoy_pct": 3.261,
+   "last_valid_yoy": {
+    "date": "2026-10",
+    "yoy_pct": 3.261
+   },
+   "level_10y": {
+    "percentile": 100.0,
+    "min": 99.005,
+    "median": 110.395,
+    "max": 131.312,
+    "n": 120
+   },
+   "yoy_10y": {
+    "percentile": 74.2,
+    "min": 0.97,
+    "median": 2.809,
+    "max": 5.64,
+    "n": 120
+   },
+   "missing_in_10y": []
+  },
+  "CUSR0000SAH1": {
+   "name": "CPI 居住類",
+   "label": "房租等剛性居住成本",
+   "unit": "指數",
+   "latest_date": "2026-10",
+   "latest_value": 433.224,
+   "latest_yoy_pct": null,
+   "last_valid_yoy": {
+    "date": "2026-09",
+    "yoy_pct": 3.223
+   },
+   "level_10y": {
+    "percentile": 100.0,
+    "min": 292.227,
+    "median": 338.948,
+    "max": 433.224,
+    "n": 119
+   },
+   "yoy_10y": null,
+   "missing_in_10y": [
+    "2025-10"
+   ]
+  },
+  "PCEDGC96": {
+   "name": "實質耐久財消費",
+   "label": "已扣通膨｜汽車、家電、家具",
+   "unit": "十億美元（2017 連鎖）",
+   "latest_date": "2026-10",
+   "latest_value": 2209.8,
+   "latest_yoy_pct": 3.922,
+   "last_valid_yoy": {
+    "date": "2026-10",
+    "yoy_pct": 3.922
+   },
+   "level_10y": {
+    "percentile": 98.3,
+    "min": 1235.7,
+    "median": 1902.9,
+    "max": 2219.7,
+    "n": 120
+   },
+   "yoy_10y": {
+    "percentile": 45.0,
+    "min": -19.172,
+    "median": 4.27,
+    "max": 70.6,
+    "n": 120
+   },
+   "missing_in_10y": []
+  },
+  "PCENDC96": {
+   "name": "實質非耐久財消費",
+   "label": "已扣通膨｜食品、汽油、日用品",
+   "unit": "十億美元（2017 連鎖）",
+   "latest_date": "2026-10",
+   "latest_value": 3615.1,
+   "latest_yoy_pct": 2.431,
+   "last_valid_yoy": {
+    "date": "2026-10",
+    "yoy_pct": 2.431
+   },
+   "level_10y": {
+    "percentile": 99.2,
+    "min": 2726.9,
+    "median": 3317.6,
+    "max": 3621.7,
+    "n": 120
+   },
+   "yoy_10y": {
+    "percentile": 46.7,
+    "min": -6.96,
+    "median": 2.553,
+    "max": 21.731,
+    "n": 120
+   },
+   "missing_in_10y": []
+  },
+  "PCESC96": {
+   "name": "實質服務消費",
+   "label": "已扣通膨｜醫療、餐旅、金融",
+   "unit": "十億美元（2017 連鎖）",
+   "latest_date": "2026-10",
+   "latest_value": 11216.6,
+   "latest_yoy_pct": 2.304,
+   "last_valid_yoy": {
+    "date": "2026-10",
+    "yoy_pct": 2.304
+   },
+   "level_10y": {
+    "percentile": 100.0,
+    "min": 7835.9,
+    "median": 9824.05,
+    "max": 11216.6,
+    "n": 120
+   },
+   "yoy_10y": {
+    "percentile": 43.3,
+    "min": -16.326,
+    "median": 2.404,
+    "max": 20.207,
+    "n": 120
+   },
+   "missing_in_10y": []
+  },
+  "DFSARX1Q020SBEA": {
+   "name": "實質餐飲與住宿服務",
+   "label": "已扣通膨｜體驗經濟溫度計",
+   "unit": "十億美元（2017 連鎖）",
+   "latest_date": "2026-07",
+   "latest_value": 1110.421,
+   "latest_yoy_pct": 1.917,
+   "last_valid_yoy": {
+    "date": "2026-07",
+    "yoy_pct": 1.917
+   },
+   "level_10y": {
+    "percentile": 100.0,
+    "min": 599.532,
+    "median": 973.799,
+    "max": 1110.421,
+    "n": 39
+   },
+   "yoy_10y": {
+    "percentile": 46.2,
+    "min": -36.833,
+    "median": 2.148,
+    "max": 55.809,
+    "n": 39
+   },
+   "missing_in_10y": []
+  },
+  "RSGCS": {
+   "name": "雜貨超市零售額",
+   "label": "名目｜在家自煮支出",
+   "unit": "百萬美元（名目、季調）",
+   "latest_date": "2026-10",
+   "latest_value": 77158.0,
+   "latest_yoy_pct": 0.91,
+   "last_valid_yoy": {
+    "date": "2026-10",
+    "yoy_pct": 0.91
+   },
+   "level_10y": {
+    "percentile": 99.2,
+    "min": 52570.0,
+    "median": 67531.5,
+    "max": 77293.0,
+    "n": 120
+   },
+   "yoy_10y": {
+    "percentile": 11.7,
+    "min": -14.002,
+    "median": 3.399,
+    "max": 29.151,
+    "n": 120
+   },
+   "missing_in_10y": []
+  },
+  "MRTSSM722USS": {
+   "name": "餐飲與飲酒場所零售額",
+   "label": "名目｜外食消費",
+   "unit": "百萬美元（名目、季調）",
+   "latest_date": "2026-09",
+   "latest_value": 92694.0,
+   "latest_yoy_pct": 6.745,
+   "last_valid_yoy": {
+    "date": "2026-09",
+    "yoy_pct": 6.745
+   },
+   "level_10y": {
+    "percentile": 100.0,
+    "min": 29776.0,
+    "median": 69270.0,
+    "max": 92694.0,
+    "n": 119
+   },
+   "yoy_10y": {
+    "percentile": 71.4,
+    "min": -50.682,
+    "median": 4.878,
+    "max": 112.849,
+    "n": 119
+   },
+   "missing_in_10y": []
+  },
+  "MRTSSM452USS": {
+   "name": "綜合百貨／大賣場零售額",
+   "label": "名目｜高性價比通路",
+   "unit": "百萬美元（名目、季調）",
+   "latest_date": "2026-09",
+   "latest_value": 81718.0,
+   "latest_yoy_pct": 4.369,
+   "last_valid_yoy": {
+    "date": "2026-09",
+    "yoy_pct": 4.369
+   },
+   "level_10y": {
+    "percentile": 99.2,
+    "min": 56327.0,
+    "median": 72475.0,
+    "max": 81825.0,
+    "n": 119
+   },
+   "yoy_10y": {
+    "percentile": 69.7,
+    "min": -5.844,
+    "median": 3.189,
+    "max": 20.727,
+    "n": 119
+   },
+   "missing_in_10y": []
+  },
+  "ECOMPCTSA": {
+   "name": "電商佔總零售比例",
+   "label": "線上通路滲透率",
+   "unit": "%（季調）",
+   "latest_date": "2026-07",
+   "latest_value": 17.9,
+   "latest_yoy_pct": "不適用（比率類看原值）",
+   "last_valid_yoy": null,
+   "level_10y": {
+    "percentile": 100.0,
+    "min": 8.4,
+    "median": 14.2,
+    "max": 17.9,
+    "n": 39
+   },
+   "yoy_10y": null,
+   "missing_in_10y": []
+  },
+  "DUTERX1A020NBEA": {
+   "name": "餐廚與玻璃器皿：實質消費量",
+   "label": "已扣通膨｜真實需求量",
+   "unit": "十億美元（2017 連鎖）",
+   "latest_date": "2025",
+   "latest_value": 71.247,
+   "latest_yoy_pct": 7.068,
+   "last_valid_yoy": null,
+   "level_10y": {
+    "percentile": 100.0,
+    "min": 37.472,
+    "median": 55.767,
+    "max": 71.247,
+    "n": 9
+   },
+   "yoy_10y": null,
+   "missing_in_10y": []
+  },
+  "DUTERG3A086NBEA": {
+   "name": "餐廚與玻璃器皿：物價指數",
+   "label": "品類價格戰溫度計",
+   "unit": "指數（2017=100）",
+   "latest_date": "2025",
+   "latest_value": 86.411,
+   "latest_yoy_pct": -2.604,
+   "last_valid_yoy": null,
+   "level_10y": {
+    "percentile": 11.1,
+    "min": 86.411,
+    "median": 92.468,
+    "max": 100.0,
+    "n": 9
+   },
+   "yoy_10y": null,
+   "missing_in_10y": []
+  }
+ },
+ "derived": {
+  "dining_grocery_ratio": {
+   "first_10y": {
+    "date": "2016-11",
+    "value": 1.0492
+   },
+   "latest": {
+    "date": "2026-09",
+    "value": 1.1993
+   },
+   "stats_10y": {
+    "percentile": 100.0,
+    "min": 0.469,
+    "median": 1.075,
+    "max": 1.199,
+    "n": 119
+   }
+  },
+  "durable_minus_nondurable_yoy": {
+   "first_10y": {
+    "date": "2016-11",
+    "value": 2.82
+   },
+   "latest": {
+    "date": "2026-10",
+    "value": 1.491
+   },
+   "stats_10y": {
+    "percentile": 45.0,
+    "min": -14.633,
+    "median": 2.077,
+    "max": 48.869,
+    "n": 120
+   }
+  }
+ },
+ "hs_import_share_12m_rolling_pct": {
+  "392410": {
+   "material": "塑膠",
+   "first": {
+    "date": "2021-11",
+    "value": 59.956
+   },
+   "latest": {
+    "date": "2026-08",
+    "value": 71.854
+   }
+  },
+  "701349": {
+   "material": "玻璃",
+   "first": {
+    "date": "2021-11",
+    "value": 3.778
+   },
+   "latest": {
+    "date": "2026-08",
+    "value": 4.734
+   }
+  },
+  "732393": {
+   "material": "不鏽鋼",
+   "first": {
+    "date": "2021-11",
+    "value": 36.266
+   },
+   "latest": {
+    "date": "2026-08",
+    "value": 23.413
+   }
+  }
+ },
+ "hs_notes": [
+  "海關進口不含美國本土射出廠內銷",
+  "HS 歸類混有非容器類廚具",
+  "名目美元",
+  "未取得：Census API 現須金鑰（依規定不申請）；UN Comtrade 僅到 HS6。"
+ ],
+ "percentile_definition": "10 年有效值中 ≤ 最新值的比例（%）"
+}

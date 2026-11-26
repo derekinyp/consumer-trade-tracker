@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:,">
+<title>美國消費與 HS 3924 追蹤</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <div class="brand"><span class="long">美國民眾經濟消費 × HS 3924 追蹤</span><span class="short">美國消費追蹤</span></div>
+    <div class="meta" id="meta">資料載入中…</div>
+  </div>
+</header>
+<main class="wrap">
+  <section class="kpis" id="kpis" aria-label="關鍵指標"></section>
+
+  <section class="block" id="verdict" aria-label="本期 AI 綜合判讀"></section>
+
+  <nav class="tabs" role="tablist" id="tabs">
+    <button role="tab" data-tab="t1" aria-selected="true">所得與緩衝</button>
+    <button role="tab" data-tab="t2">財富與違約</button>
+    <button role="tab" data-tab="t3">通膨體感</button>
+    <button role="tab" data-tab="t4">消費轉向</button>
+    <button role="tab" data-tab="t5">HS 3924 替代</button>
+  </nav>
+  <section class="panel" id="t1"></section>
+  <section class="panel" id="t2" hidden></section>
+  <section class="panel" id="t3" hidden></section>
+  <section class="panel" id="t4" hidden></section>
+  <section class="panel" id="t5" hidden></section>
+
+  <section class="block" id="method" aria-label="方法論與口徑"></section>
+</main>
+<footer class="wrap foot">資料：FRED（聖路易聯準銀行，公開 CSV）、UN Comtrade（公開預覽端點）。官方未發布月份留白，不內插。</footer>
+<script src="assets/vendor/chart.umd.min.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
