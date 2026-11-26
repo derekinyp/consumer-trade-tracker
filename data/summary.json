@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-26 16:11",
+ "generated": "2026-11-26 16:46",
  "indicators": {
   "DSPIC96": {
    "name": "實質可支配個人所得",
@@ -26,6 +26,24 @@
     "max": 30.62,
     "n": 120
    },
+   "missing_in_10y": []
+  },
+  "A229RX0": {
+   "name": "實質可支配所得（人均）",
+   "label": "稅後｜含政府補助｜已扣通膨｜不含資本利得｜人均",
+   "unit": "美元（2017 連鎖）",
+   "latest_date": "2026-10",
+   "latest_value": 53790.0,
+   "latest_yoy_pct": 1.362,
+   "last_valid_yoy": null,
+   "level_10y": {
+    "percentile": 97.5,
+    "min": 43843.0,
+    "median": 50249.0,
+    "max": 61764.0,
+    "n": 120
+   },
+   "yoy_10y": null,
    "missing_in_10y": []
   },
   "PSAVERT": {
