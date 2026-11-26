@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-26 16:46",
+ "generated": "2026-11-26 16:58",
  "indicators": {
   "DSPIC96": {
    "name": "實質可支配個人所得",
@@ -35,7 +35,10 @@
    "latest_date": "2026-10",
    "latest_value": 53790.0,
    "latest_yoy_pct": 1.362,
-   "last_valid_yoy": null,
+   "last_valid_yoy": {
+    "date": "2026-10",
+    "yoy_pct": 1.362
+   },
    "level_10y": {
     "percentile": 97.5,
     "min": 43843.0,
@@ -43,7 +46,40 @@
     "max": 61764.0,
     "n": 120
    },
-   "yoy_10y": null,
+   "yoy_10y": {
+    "percentile": 36.7,
+    "min": -21.665,
+    "median": 2.263,
+    "max": 30.458,
+    "n": 120
+   },
+   "missing_in_10y": []
+  },
+  "A794RX0Q048SBEA": {
+   "name": "人均實質消費支出",
+   "label": "已扣通膨｜人均｜季調年率",
+   "unit": "美元（2017 連鎖，季調年率）",
+   "latest_date": "2026-07",
+   "latest_value": 49447.0,
+   "latest_yoy_pct": 2.381,
+   "last_valid_yoy": {
+    "date": "2026-07",
+    "yoy_pct": 2.381
+   },
+   "level_10y": {
+    "percentile": 100.0,
+    "min": 38236.0,
+    "median": 45301.0,
+    "max": 49447.0,
+    "n": 39
+   },
+   "yoy_10y": {
+    "percentile": 74.4,
+    "min": -8.997,
+    "median": 1.93,
+    "max": 16.73,
+    "n": 39
+   },
    "missing_in_10y": []
   },
   "PSAVERT": {
@@ -458,6 +494,17 @@
   }
  },
  "derived": {
+  "income_vs_pce_yoy": {
+   "first_10y": null,
+   "latest": {
+    "date": "2026-07",
+    "income_yoy": 1.129,
+    "pce_yoy": 2.381,
+    "gap": -1.252
+   },
+   "stats_10y": null,
+   "note": "消費為官方季度人均序列 A794RX0Q048SBEA；所得為 A229RX0 同季首月（01/04/07/10）年增率，精確一年對齊。"
+  },
   "dining_grocery_ratio": {
    "first_10y": {
     "date": "2016-11",

@@ -23,7 +23,7 @@ function kpi(sid,mode,extra){
   ${st?`<div class="bar" title="10 年最小 ${fmt(st.min,2)}／中位 ${fmt(st.median,2)}／最大 ${fmt(st.max,2)}"><i style="left:calc(${pos}% - 1px)"></i></div><div class="k-sub">10 年區間 ${fmt(st.min,1)}～${fmt(st.max,1)}，中位 ${fmt(st.median,1)}</div>`:''}
   <span class="tag">${esc(extra)}</span></div>`;
 }
-$('#kpis').innerHTML=kpi('DSPIC96','yoy','稅後｜含補助｜已扣通膨')+kpi('PSAVERT','level',(S.PSAVERT&&S.PSAVERT.latest<5)?'低於 5%：緩衝偏薄':'低於 5% 代表緩衝偏薄')+kpi('WFRBST01134','level','每季｜資產減負債')+kpi('DRCCLACBS','level','底層壓力領先指標');
+$('#kpis').innerHTML=kpi('A229RX0','yoy','稅後｜含補助｜已扣通膨｜人均')+kpi('PSAVERT','level',(S.PSAVERT&&S.PSAVERT.latest<5)?'低於 5%：緩衝偏薄':'低於 5% 代表緩衝偏薄')+kpi('WFRBST01134','level','每季｜資產減負債')+kpi('DRCCLACBS','level','底層壓力領先指標');
 
 // 判讀
 const stCls={'正向':'s-ok','中性警戒':'s-watch','壓力升溫':'s-off'};
@@ -87,10 +87,20 @@ function levelChart(el,ids,title,unit,cap,extra={}){
 const lab=id=>ok(id)?[S[id].label]:[];
 const t1=$('#t1'),t2=$('#t2'),t3=$('#t3'),t4=$('#t4'),t5=$('#t5');
 const med={at:'median-level'};
-// 分頁 1：原值為主，年增率下置
-levelChart(t1,['DSPIC96'],'圖 1　實質可支配所得（總額）','','2020–2021 年的高峰來自疫情補助金，屬暫時性拉抬，不是常態所得水準。虛線為近 10 年中位數。',{labels:lab('DSPIC96'),refs:[med],ydec:0,dec:1});
-levelChart(t1,['A229RX0'],'圖 1 附　實質可支配所得（人均）','','與總額相同口徑（稅後、含補助、已扣通膨、不含資本利得），改以每人計算，避免人口成長把總額墊高。虛線為近 10 年中位數。',{labels:lab('A229RX0'),refs:[med],ydec:0,dec:0});
-yoyChart(t1,['DSPIC96','A229RX0'],'圖 1 年增率　總額與人均','',{labels:lab('DSPIC96')});
+// 分頁 1：所得 vs 消費（核心問題）置頂；所得圖改以人均原值
+const ic=D.derived.income_vs_pce_yoy||{};
+const icL=ic.latest||{};
+chart(t1,{title:'圖 1　人均實質所得與人均實質消費年增率',sub:'年增率｜單位：%｜兩者皆為人均、已扣通膨；消費為官方季度序列，所得取同季首月對齊',unit:'%',
+ labels_x:(ic.dates||[]).map(qlab),
+ ds:[{label:'人均實質可支配所得（A229RX0）',data:ic.income_yoy||[],color:C[0]},
+     {label:'人均實質消費（A794RX0Q048SBEA）',data:ic.pce_yoy||[],color:C[1]}],
+ labels:['皆已扣通膨','皆為人均','消費為季度'],
+ cap:`閱讀：消費增速高於所得增速，代表支出靠動用儲蓄或信用支撐，可對照下方個人儲蓄率。來源：FRED A229RX0、A794RX0Q048SBEA。最新 ${esc(icL.date||'—')}：所得年增 ${sg(icL.income_yoy)}%，消費年增 ${sg(icL.pce_yoy)}%，差距（所得－消費）為 ${sg(icL.gap)} 個百分點。`});
+chart(t1,{title:'圖 1 附　所得減消費年增率差',sub:'百分點｜正值＝所得增速快於消費；負值＝消費快於所得、靠儲蓄或信用支撐',unit:' 個百分點',
+ labels_x:(ic.dates||[]).map(qlab),ds:[{label:'所得－消費',data:ic.gap||[],color:C[4]}],
+ refs:[{at:0,label:'零線',color:'#7A6F64'}],short:true,
+ cap:`計算：YoY(A229RX0 同季首月) − YoY(A794RX0Q048SBEA)。最新 ${esc(icL.date||'—')}。`});
+levelChart(t1,['A229RX0'],'圖 1b　實質可支配所得（人均）','','稅後、含政府補助、已扣通膨、不含資本利得。2020–2021 年的高峰來自疫情補助金，屬暫時性拉抬，不是常態所得水準。虛線為近 10 年中位數。',{labels:lab('A229RX0'),refs:[med],ydec:0,dec:0});
 levelChart(t1,['PSAVERT'],'圖 1b　個人儲蓄率','%','低於 5% 代表家庭財務緩衝偏薄。橙虛線為 5% 門檻，灰虛線為近 10 年中位數。',{labels:lab('PSAVERT'),refs:[{at:5,label:'5% 緩衝門檻',color:'#B37510'},med]});
 levelChart(t1,['MEHOINUSA672N'],'圖 2　實質家庭中位數所得（年）','','每年 9 月更新一次。此圖本身即為原值（稅前、僅含現金補助、已扣通膨）。',{labels:lab('MEHOINUSA672N'),fill:true,points:true,dec:0,ydec:0});
 // 分頁 2

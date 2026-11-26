@@ -17,7 +17,8 @@ TODAY = date.today()
 # (id, 名稱, 頻率 M/Q/A, 單位, 看法 yoy/level, 模組, 口徑標籤)
 FRED = [
  ("DSPIC96","實質可支配個人所得","M","十億美元（2017 連鎖）","yoy","所得與緩衝","稅後｜含政府補助｜已扣通膨｜不含資本利得"),
- ("A229RX0","實質可支配所得（人均）","M","美元（2017 連鎖）","level","所得與緩衝","稅後｜含政府補助｜已扣通膨｜不含資本利得｜人均"),
+ ("A229RX0","實質可支配所得（人均）","M","美元（2017 連鎖）","yoy","所得與緩衝","稅後｜含政府補助｜已扣通膨｜不含資本利得｜人均"),
+ ("A794RX0Q048SBEA","人均實質消費支出","Q","美元（2017 連鎖，季調年率）","yoy","消費轉向","已扣通膨｜人均｜季調年率"),
  ("PSAVERT","個人儲蓄率","M","%（季調）","level","所得與緩衝","低於 5% 代表家庭財務緩衝偏薄"),
  ("MEHOINUSA672N","實質家庭中位數所得","A","美元（已扣通膨）","level","所得與緩衝","稅前｜僅含現金補助｜已扣通膨｜每年 9 月更新"),
  ("WFRBST01134","頂層 1% 淨財富佔比","Q","%","level","財富與警訊","每季｜淨財富＝資產－負債｜名目佔比"),
@@ -232,7 +233,23 @@ def build():
             if v is not None and d >= since: return {"date": d, "value": v}
         return None
     tenp = ten.isoformat()[:7]
+    # 人均所得 vs 人均消費年增率（消費為官方季度序列；所得取同季首月以對齊）
+    inc = dict(zip(series.get("A229RX0", {}).get("dates", []), series.get("A229RX0", {}).get("yoy", [])))
+    pce = series.get("A794RX0Q048SBEA", {})
+    pdts, pyoy = pce.get("dates", []), pce.get("yoy", [])
+    iyoy = [inc.get(d) for d in pdts]
+    gap = [r(a - b) if a is not None and b is not None else None for a, b in zip(iyoy, pyoy)]
+    def last3(dates, *seqs):
+        for i in range(len(dates)-1, -1, -1):
+            if all(seq[i] is not None for seq in seqs):
+                return {"date": dates[i], "income_yoy": iyoy[i], "pce_yoy": pyoy[i], "gap": gap[i]}
+        return None
+    derived_ic = {"dates": pdts, "income_yoy": iyoy, "pce_yoy": pyoy, "gap": gap,
+                  "latest": last3(pdts, iyoy, pyoy),
+                  "note": "消費為官方季度人均序列 A794RX0Q048SBEA；所得為 A229RX0 同季首月（01/04/07/10）年增率，精確一年對齊。"}
+
     derived = {
+        "income_vs_pce_yoy": derived_ic,
         "dining_grocery_ratio": {"dates": dd, "values": ratio, "latest": lastnn(dd, ratio),
                                  "first_10y": firstnn(dd, ratio, tenp), "stats": pct_stats([v for d, v in zip(dd, ratio) if d >= tenp], (lastnn(dd, ratio) or {}).get("value"))},
         "durable_minus_nondurable_yoy": {"dates": sd, "values": spread, "latest": lastnn(sd, spread),
@@ -306,7 +323,7 @@ def summary(out):
                   "missing_in_10y": s["missing"][-6:]}
     hs = out["hs"]
     return {"generated": out["generated"], "indicators": S,
-            "derived": {k: {"first_10y": v["first_10y"], "latest": v["latest"], "stats_10y": v["stats"]} for k, v in out["derived"].items()},
+            "derived": {k: ({"first_10y": v.get("first_10y"), "latest": v.get("latest"), "stats_10y": v.get("stats"), **({ "note": v["note"]} if "note" in v else {})} ) for k, v in out["derived"].items()},
             "hs_import_share_12m_rolling_pct": {i["code"]: {"material": i["material"], "first": i["first_share"], "latest": i["latest_share"]} for i in hs["items"]},
             "hs_notes": ["海關進口不含美國本土射出廠內銷", "HS 歸類混有非容器類廚具", "名目美元", hs["hs10_3924104000"]],
             "percentile_definition": "10 年有效值中 ≤ 最新值的比例（%）"}
